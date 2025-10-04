@@ -10,3 +10,6 @@ resource "aws_s3_bucket" "example" {
   tags = {
     Name        = "MyBucket-${terraform.workspace}"
     Environment = terraform.workspace
+
+}
+}
