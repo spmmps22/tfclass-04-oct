@@ -1,105 +1,53 @@
 name: Terraform CI/CD
-56
-​
-57
+
 on:
-58
   push:
-59
     branches:
-60
       - main
-61
       - staging
-62
       - dev
-63
-​
-64
+
 jobs:
-65
   terraform:
-66
     runs-on: ubuntu-latest
-67
-​
-68
+
     env:
-69
       AWS_REGION: us-east-1
-70
       TF_WORKSPACE: ${{ github.ref_name }}  # Branch name maps to workspace
-71
-​
-72
+
     steps:
-73
       # Checkout repo
-74
       - name: Checkout code
-75
         uses: actions/checkout@v3
-76
-​
-77
+
       # Setup Terraform
-78
       - name: Setup Terraform
-79
         uses: hashicorp/setup-terraform@v3
-80
         with:
-81
           terraform_version: 1.8.5
-82
-​
-83
+
       # Configure AWS credentials
-84
       - name: Configure AWS Credentials
-85
         uses: aws-actions/configure-aws-credentials@v4
-86
         with:
-87
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
-88
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-89
           aws-region: ${{ env.AWS_REGION }}
-90
-​
-91
+
       # Terraform Init
-92
       - name: Terraform Init
-93
         run: terraform init
-94
-​
-95
+
       # Validate Terraform code
-96
       - name: Terraform Validate
-97
         run: terraform validate
-98
-​
-99
+
       # Terraform Plan
-100
       - name: Terraform Plan
-101
         run: terraform plan -out=tfplan
-102
-​
-103
+
       # Terraform Apply (only for main branch / prod)
-104
       - name: Terraform Apply
-105
         if: github.ref == 'refs/heads/main'
-106
         run: terraform apply -auto-approve tfplan
-107
-  
+        
