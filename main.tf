@@ -8,7 +8,7 @@ resource "aws_s3_bucket" "example" {
   acl    = "private"
 
   tags = {
-    Name        = "my-bucketdoubletest-terraform-6389354552237ytfv5678fhj-${terraform.workspace}"
+    Name        = "my-bucket-surya-2025-10-04${terraform.workspace}"
     Environment = terraform.workspace
 
 }
