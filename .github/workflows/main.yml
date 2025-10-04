@@ -49,6 +49,6 @@ jobs:
 
       # Terraform Apply (only for main branch / prod)
       - name: Terraform Apply
-        if: github.ref == 'refs/heads/Surya_Terraform'
+        if: github.ref == 'refs/heads/main'
         run: terraform apply -auto-approve tfplan
         
