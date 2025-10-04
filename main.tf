@@ -4,11 +4,11 @@ provider "aws" {
 
 # Create S3 bucket -1
 resource "aws_s3_bucket" "example" {
-  bucket = "my-s3-bucketSurya-${terraform.workspace}" 
+  bucket = "my-s3-bucket-${terraform.workspace}" 
   acl    = "private"
 
   tags = {
-    Name        = "MyBucket-${terraform.workspace}"
+    Name        = "my-buckettest-terraform-63837ytfv5678fhj22-${terraform.workspace}"
     Environment = terraform.workspace
 
 }
